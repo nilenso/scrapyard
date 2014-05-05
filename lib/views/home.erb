@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+
+<head>
+  <title> Scrapyard </title>
+</head>
+
+<body>
+  Idea heapster
+
+  <a href="/ideas/new">New Idea</a>
+
+  <% @ideas.each do |idea| %>
+    <div class="idea">
+      <%= idea.title %>
+    </div>
+  <% end %>
+
+</body>

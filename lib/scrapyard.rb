@@ -14,7 +14,8 @@ module Scrapyard
     end
 
     get '/' do
-      "Idea heapster"
+      @ideas = Scrapyard::Idea.all
+      erb :home
     end
 
     get '/ideas/new' do

@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: scrapyard_development
+  pool: 5
+  username: jithu
+  password:
+  host: localhost
+
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: scrapyard_production
+  pool: 5
+  username: jithu
+  password:
+  host: localhost

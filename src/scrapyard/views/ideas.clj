@@ -1,7 +1,5 @@
 (ns scrapyard.views.ideas
-  (:require [hiccup.page :as h]))
+  (:require [scrapyard.views.layout :as layout]))
 
 (defn index []
-  (h/html5
-   [:head
-    [:title "Scrapyard"]]))
+  (layout/common [:a {:href "/ideas/new"} "Create New Idea"]))

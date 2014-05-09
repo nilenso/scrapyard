@@ -3,8 +3,13 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.6"]
-                 [hiccup "1.0.5"]]
-  :plugins [[lein-ring "0.8.10"]]
+                 [hiccup "1.0.5"]
+                 [ragtime/ragtime.sql.files "0.3.7"]
+                 [org.postgresql/postgresql "9.3-1100-jdbc4"]]
+  :plugins [[lein-ring "0.8.10"]
+            [ragtime/ragtime.lein "0.3.7"]]
+  :ragtime {:migrations ragtime.sql.files/migrations
+          :database "jdbc:postgresql://localhost:5432/scrapyard_development?user=jithu"}
   :ring {:handler scrapyard.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]

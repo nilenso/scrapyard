@@ -5,6 +5,7 @@
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [ragtime/ragtime.sql.files "0.3.7"]
+                 [korma "0.3.1"]
                  [org.postgresql/postgresql "9.3-1100-jdbc4"]]
   :plugins [[lein-ring "0.8.10"]
             [ragtime/ragtime.lein "0.3.7"]]

@@ -1,4 +1,4 @@
-(ns scrapyard.schema
+(ns scrapyard.db
   (require [korma.db :as db]))
 
 (defn setup []

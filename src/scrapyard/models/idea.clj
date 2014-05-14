@@ -1,10 +1,10 @@
 (ns scrapyard.models.idea
   (:use korma.core)
-  (:require [scrapyard.schema :as schema]))
+  (:require [scrapyard.db :as db]))
 
 (defentity ideas)
 
-(schema/setup)
+(db/setup)
 
 (defn all []
   (select ideas)

@@ -2,8 +2,7 @@
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [scrapyard.controllers.ideas :as ideas]
-            [scrapyard.schema :as schema]))
+            [scrapyard.controllers.ideas :as ideas]))
 
 (defroutes app-routes
   (GET "/" [] ideas/index)

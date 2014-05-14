@@ -4,3 +4,6 @@
 
 (defn index [request]
   (view/index (idea/all)))
+
+(defn new [request]
+  (view/new))

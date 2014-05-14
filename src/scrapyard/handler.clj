@@ -6,8 +6,8 @@
             [scrapyard.schema :as schema]))
 
 (defroutes app-routes
-  (GET "/" []
-       ideas/index)
+  (GET "/" [] ideas/index)
+  (GET "/ideas/new" [] ideas/new)
   (route/resources "/")
   (route/not-found "Not Found"))
 

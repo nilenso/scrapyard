@@ -13,7 +13,11 @@
   :plugins [[lein-ring "0.8.10"]
             [ragtime/ragtime.lein "0.3.7"]]
   :ragtime {:migrations ragtime.sql.files/migrations
-          :database "jdbc:postgresql://localhost:5432/scrapyard_development?user=jithu"}
+            :database (or (when-let [[_ username password host port db-name] (next (re-find #"^(.*)://(.*):(.*)@(.*):(.*)/(.*)$"
+                                                                                            (or (System/getenv "DATABASE_URL")
+                                                                                                "")))]
+                            (str "jdbc:postgresql://" host ":" port "/" db-name "?user=" username "&password=" password))
+                          "jdbc:postgresql://localhost:5432/scrapyard_development?user=jithu")}
   :ring {:handler scrapyard.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]

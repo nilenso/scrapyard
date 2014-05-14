@@ -8,6 +8,7 @@
                  [korma "0.3.1"]
                  [org.postgresql/postgresql "9.3-1100-jdbc4"]
                  [org.clojure/java.jdbc "0.3.3"]]
+  :min-lein-version "2.0.0"
   :plugins [[lein-ring "0.8.10"]
             [ragtime/ragtime.lein "0.3.7"]]
   :ragtime {:migrations ragtime.sql.files/migrations

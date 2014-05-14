@@ -1,10 +1,10 @@
 (ns scrapyard.views.layout
   (:require [hiccup.page :as h]))
 
-(defn common [body]
+(defn common [& args]
   (h/html5
    [:head
     [:title "Scrapyard"]]
    [:body
     [:h1 {:class "header"} "Scrapyard"]
-    [:div {:class "container"} body]]))
+    [:div {:class "container"} args]]))

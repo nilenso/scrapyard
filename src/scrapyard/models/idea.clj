@@ -1,17 +1,11 @@
 (ns scrapyard.models.idea
-  (:require [korma.core :as sql]))
+  (:use korma.core)
+  (:require [scrapyard.schema :as schema]))
 
-(sql/defentity ideas)
+(defentity ideas)
 
-(def setup
-  (sql/defdb database
-    (sql/postgres ({:db "scrapyard_development"
-                    :password ""
-                    :user "jithu"
-                    :host "localhost"
-                    :port "5432"}))))
+(schema/setup)
 
-(def all
-  (setup)
-  (sql/select ideas)
+(defn all []
+  (select ideas)
   )

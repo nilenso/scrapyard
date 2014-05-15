@@ -4,8 +4,6 @@
 
 (defentity ideas)
 
-(db/setup)
-
 (defn all []
   (select ideas)
   )

@@ -3,8 +3,10 @@
 
 (defn setup []
   (db/defdb database
-    (db/postgres {:db "scrapyard_development"
-                  :password ""
-                  :user "jithu"
-                  :host "localhost"
-                  :port "5432"})))
+    (let [[_ username password host port db-name]
+          (next (re-find #"(.*)://(.*):(.*)@(.*):(.*)/(.*)" (or (System/getenv "DATABASE_URL") "")))]
+      (db/postgres {:db (or db-name "scrapyard_development")
+                    :password (or password "")
+                    :user (or username "jithu")
+                    :host (or host "localhost")
+                    :port (or port "5432")}))))

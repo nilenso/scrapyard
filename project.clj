@@ -5,6 +5,7 @@
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [ring/ring-jetty-adapter "1.1.0"]
+                 [ring/ring-devel "1.2.1"]
                  [ragtime/ragtime.sql.files "0.3.7"]
                  [korma "0.3.1"]
                  [org.postgresql/postgresql "9.3-1100-jdbc4"]

@@ -1,9 +1,17 @@
 (ns scrapyard.models.idea
-  (:use korma.core)
-  (:require [scrapyard.db :as db]))
+  (:require [korma.core :as sql]))
 
-(defentity ideas)
+(sql/defentity ideas)
 
 (defn all []
-  (select ideas)
-  )
+  (sql/select ideas))
+
+(defn create [attrs]
+  (sql/insert ideas
+              (sql/values {:title (get attrs :title)
+                           :description (get attrs :description)})))
+
+(defn find-by-id [id]
+  (first
+   (sql/select ideas
+               (sql/where {:id id}))))

@@ -7,6 +7,9 @@
 (defroutes app-routes
   (GET "/" [] ideas/index)
   (GET "/ideas/new" [] ideas/new)
+  (GET "/ideas/:id" [id]
+       (ideas/show id))
+  (POST "/ideas" [] ideas/create)
   (route/resources "/")
   (route/not-found "Not Found"))
 

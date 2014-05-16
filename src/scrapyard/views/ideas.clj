@@ -11,9 +11,15 @@
 
 (defn new []
   (layout/common
-   (form-to [:post ""]
+   (form-to [:post "/ideas"]
             (label "ideas[title]" "Title")
             (text-field "ideas[title]")
             (label "ideas[description]" "Description")
             (text-area "ideas[description]")
             (submit-button "Save"))))
+
+(defn show [idea]
+  (layout/common [:h2 "Title"]
+                 [:p {} (get idea :title)]
+                 [:h2 "Description"]
+                 [:p {} (get idea :description)]))

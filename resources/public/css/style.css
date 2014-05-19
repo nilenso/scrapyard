@@ -10,18 +10,29 @@ h1.header {
   width: 200px;
   margin: 0 auto;
   margin-top: 30px;
+  text-align: center;
 }
 
 .create-idea-link {
-  margin-top: 20px;
+  width: 200px;
+  margin: 30px auto 0;
+  padding: 10px;
   display: block;
   text-decoration: none;
+  text-align: center;
   font-size: 18px;
+  font-weight: bold;
   font-variant: small-caps;
+  border: 1px dotted #16A085;
+  color: #171717;
+}
+
+.create-idea-link:hover {
+  border: 1px solid #16A085;
 }
 
 .idea-list {
-  margin-top: 20px;
+  margin: 40px auto 0;
   width: 70%;
 }
 
@@ -30,10 +41,12 @@ h1.header {
   display: block;
   text-decoration: none;
   color: #171717;
+  padding: 10px;
 }
 
 .idea-list-item:hover {
   color: #16A085;
+  background-color: #ECF0F1;
 }
 
 /* new idea */

@@ -4,7 +4,9 @@
 (defn common [& args]
   (h/html5
    [:head
-    [:title "Scrapyard"]]
+    [:title "Scrapyard"]
+    [:link {:rel "stylesheet" :type "text/css" :href "/css/style.css"}]]
    [:body
-    [:h1 {:class "header"} "Scrapyard"]
-    [:div {:class "container"} args]]))
+    [:div {:class "container"}
+     [:h1 {:class "header"} "Scrapyard"]
+     args]]))

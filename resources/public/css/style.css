@@ -1,0 +1,78 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+  font-family: Raleway;
+}
+
+h1.header {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.create-idea-link {
+  margin-top: 20px;
+  display: block;
+  text-decoration: none;
+  font-size: 18px;
+  font-variant: small-caps;
+}
+
+.idea-list {
+  margin-top: 20px;
+  width: 70%;
+}
+
+.idea-list-item {
+  margin-top: 20px;
+  display: block;
+  text-decoration: none;
+  color: #171717;
+}
+
+.idea-list-item:hover {
+  color: #16A085;
+}
+
+/* new idea */
+
+label, input {
+  display: block;
+}
+
+label {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.new-idea-form {
+  width: 70%;
+  margin: 60px auto 0;
+}
+
+.new-idea-form-title, .new-idea-form-description {
+  margin-top: 10px;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #AAA;
+}
+
+.new-idea-form-description {
+  height: 300px;
+}
+
+.new-idea-form-submit {
+  border: 1px dotted #16A085;
+  width: 100px;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: white;
+  font-weight: bolder;
+}
+
+.new-idea-form-submit:hover {
+  cursor: pointer;
+  border: 1px solid #16A085;
+}

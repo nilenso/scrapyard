@@ -3,23 +3,24 @@
   (:require [scrapyard.views.layout :as layout]))
 
 (defn idea-list-item [idea]
-  [:div {:class "idea-list-item"} (get idea :title)])
+  [:a {:href (str "/ideas/" (get idea :id)) :class "idea-list-item"} (get idea :title)])
 
 (defn index [ideas]
-  (layout/common [:a {:href "/ideas/new"} "Create New Idea"]
-                 (map idea-list-item ideas)))
+  (layout/common [:a {:href "/ideas/new" :class "create-idea-link"} "Create New Idea"]
+                 [:div {:class "idea-list"}
+                  (map idea-list-item ideas)]))
 
 (defn new []
   (layout/common
-   (form-to [:post "/ideas"]
+   (form-to {:class "new-idea-form"} [:post "/ideas"]
             (label "ideas[title]" "Title")
-            (text-field "ideas[title]")
+            (text-field {:class "new-idea-form-title"} "ideas[title]")
             (label "ideas[description]" "Description")
-            (text-area "ideas[description]")
-            (submit-button "Save"))))
+            (text-area {:class "new-idea-form-description"} "ideas[description]")
+            (submit-button {:class "new-idea-form-submit"} "Save"))))
 
 (defn show [idea]
   (layout/common [:h2 "Title"]
-                 [:p {} (get idea :title)]
+                 [:p (get idea :title)]
                  [:h2 "Description"]
-                 [:p {} (get idea :description)]))
+                 [:p (get idea :description)]))

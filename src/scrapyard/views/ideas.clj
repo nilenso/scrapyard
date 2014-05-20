@@ -20,7 +20,8 @@
             (submit-button {:class "new-idea-form-submit"} "Save"))))
 
 (defn show [idea]
-  (layout/common [:h2 "Title"]
-                 [:p (get idea :title)]
-                 [:h2 "Description"]
-                 [:p (get idea :description)]))
+  (layout/common [:div {:class "idea-details"}
+                  [:h2 "Title"]
+                  [:p (get idea :title)]
+                  [:h2 "Description"]
+                  [:p (get idea :description)]]))

@@ -8,5 +8,5 @@
     [:link {:rel "stylesheet" :type "text/css" :href "/css/style.css"}]]
    [:body
     [:div {:class "container"}
-     [:h1 {:class "header"} "Scrapyard"]
+     [:a {:href "/" :class "site-header-link"} "Scrapyard"]
      args]]))

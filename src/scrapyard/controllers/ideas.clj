@@ -3,6 +3,9 @@
             [scrapyard.models.idea :as idea]
             [ring.util.response :as resp]))
 
+(defn -tokenize-needs [needs]
+  (clojure.string/split needs #","))
+
 (defn index [request]
   (view/index (idea/all)))
 
@@ -10,7 +13,8 @@
   (view/new))
 
 (defn create [request]
-  (idea/create (get-in request [:params :ideas]))
+  (idea/create-with-needs (get-in request [:params :idea])
+                         (-tokenize-needs (get-in request [:params :needs :name])))
   (resp/redirect "/"))
 
 (defn show [id]

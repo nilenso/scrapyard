@@ -80,6 +80,10 @@ label {
   height: 300px;
 }
 
+.new-idea-form-need {
+  width: 300px;
+}
+
 .new-idea-form-submit {
   border: 1px dotted #16A085;
   width: 100px;

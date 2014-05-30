@@ -16,8 +16,9 @@
                  [:div {:class "idea-list"}
                   (map idea-list-item ideas)]))
 
-(defn new []
+(defn new [errors]
   (layout/common
+   (layout/errors errors)
    (form-to {:class "new-idea-form"} [:post "/ideas"]
             (label "idea[title]" "Title")
             (text-field {:class "new-idea-form-title"} "idea[title]")

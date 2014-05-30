@@ -10,12 +10,15 @@
   (view/index (idea/all)))
 
 (defn new [request]
-  (view/new))
+  (view/new []))
 
 (defn create [request]
-  (idea/create-with-needs (get-in request [:params :idea])
-                         (-tokenize-needs (get-in request [:params :needs :name])))
-  (resp/redirect "/"))
+  (let [idea
+        (idea/create-with-needs (get-in request [:params :idea])
+                                (-tokenize-needs (get-in request [:params :needs :name])))]
+    (if-let [errors (:errors idea)]
+      (view/new errors)
+      (resp/redirect "/"))))
 
 (defn show [id]
   (view/show (idea/find-by-id (Integer. id))))

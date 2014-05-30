@@ -11,3 +11,12 @@
     [:div {:class "container"}
      [:a {:href "/" :class "site-header-link"} "Scrapyard"]
      args]]))
+
+(defn errors [errors]
+  (if errors
+    [:div {:class "error-messages"}
+     [:ul
+      (map
+       (fn [error]
+         [:li error])
+       errors)]]))

@@ -81,6 +81,7 @@ label {
 }
 
 .new-idea-form-need {
+  margin-top: 10px;
   width: 300px;
 }
 
@@ -103,4 +104,11 @@ label {
 .idea-details {
   margin: 60px auto 0;
   width: 70%;
+}
+
+/* errors */
+.error-messages {
+  width: 75%;
+  margin: 45px auto 0;
+  color: crimson;
 }

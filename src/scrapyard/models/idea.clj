@@ -2,20 +2,28 @@
   (:require [korma.core :as sql]
             [korma.db :as db]
             [scrapyard.models.need :as need]
-            [scrapyard.models.entities :as entities]))
+            [scrapyard.models.entities :as entities]
+            [scrapyard.models.validations :as validations]))
+
+(defn validate [idea]
+  (validations/presence-of [:title] idea))
 
 (defn all []
   (sql/select entities/ideas))
 
 (defn create [attrs]
-  (sql/insert entities/ideas
-              (sql/values {:title (get attrs :title)
-                           :description (get attrs :description)})))
+  (if-let [errors (validate attrs)]
+    {:errors errors}
+    (sql/insert entities/ideas
+                (sql/values {:title (:title attrs)
+                             :description (:description attrs)}))))
 
 (defn create-with-needs [idea-attrs need-attrs]
   (db/transaction
    (let [idea (create idea-attrs)]
-     (need/bulk-create-from-idea need-attrs (get idea :id)))))
+     (if (:errors idea)
+       idea
+       (need/bulk-create-from-idea need-attrs (:id idea))))))
 
 (defn find-by-id [id]
   (first

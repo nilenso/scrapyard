@@ -1,5 +1,6 @@
 (ns scrapyard.models.idea
   (:require [korma.core :as sql]
+            [korma.db :as db]
             [scrapyard.models.need :as need]
             [scrapyard.models.entities :as entities]))
 
@@ -8,12 +9,13 @@
 
 (defn create [attrs]
   (sql/insert entities/ideas
-                (sql/values {:title (get attrs :title)
-                             :description (get attrs :description)})))
+              (sql/values {:title (get attrs :title)
+                           :description (get attrs :description)})))
 
 (defn create-with-needs [idea-attrs need-attrs]
-  (let [idea (create idea-attrs)]
-    (need/bulk-create-from-idea need-attrs (get idea :id))))
+  (db/transaction
+   (let [idea (create idea-attrs)]
+     (need/bulk-create-from-idea need-attrs (get idea :id)))))
 
 (defn find-by-id [id]
   (first

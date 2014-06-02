@@ -1,19 +1,21 @@
 # scrapyard
 
-FIXME
+dump your dumb product ideas
 
 ## Prerequisites
 
-You will need [Leiningen][1] 1.7.0 or above installed.
+You will need [Leiningen][1] 1.7.0 or above and postgres db installed.
 
 [1]: https://github.com/technomancy/leiningen
 
-## Running
+## Running (on a Mac)
+```
+   % psql
+     > create database scrapyard_development;
 
-To start a web server for the application, run:
+   % lein ragtime migrate
 
-    lein ring server
+   % sed -i '' -e 's/jithu/<your pg user>/g' project.clj src/scrapyard/db.clj
 
-## License
-
-Copyright © 2014 FIXME
+   % lein trampoline run -m scrapyard.web 3000
+```

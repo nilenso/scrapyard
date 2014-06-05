@@ -1,14 +1,15 @@
 (ns scrapyard.models.need
   (require [korma.core :as sql]
            [scrapyard.models.entities :as entities]
-           [scrapyard.models.validations :as validations]
+           [scrapyard.models.validations :as validates]
            [scrapyard.models.ideas-needs :as ideas-needs]))
 
-(defn validate [need]
-  (validations/presence-of [:name] need))
+(def validations
+  (validates/enlist
+   (validates/presence-of :name)))
 
 (defn create [attrs]
-  (if-let [errors (validate attrs)]
+  (if-let [errors (validates/perform attrs validations)]
     {:errors errors}
     (sql/insert entities/needs
                 (sql/values {:name (get attrs :name)}))))
@@ -24,11 +25,7 @@
     (create attrs)))
 
 (defn bulk-create-from-idea [needs-attrs idea-id]
-  (reduce (fn [acc need]
-            (if-let [need (find-or-create {:name need})]
-              (if-let [error (:errors need)]
-                (cons (:errors acc) error)
-                (ideas-needs/create {:ideas_id idea-id
-                                     :needs_id (:id need)}))))
-          {:errors []}
-          needs-attrs))
+  (doseq [need needs-attrs]
+    (if-let [need (find-or-create {:name need})]
+      (ideas-needs/create {:ideas_id idea-id
+                           :needs_id (:id need)}))))

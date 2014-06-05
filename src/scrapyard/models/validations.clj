@@ -2,26 +2,27 @@
   (require [clojure.string :as string]
            [korma.core :as sql]))
 
-(defn presence-of [attrs model]
-  (reduce (fn [error-messages attr]
-            (if (clojure.string/blank? (model attr))
-              (-> (name attr)
-                  (string/capitalize)
-                  (->>
-                   (format "%s should be present."))
-                  (cons error-messages))))
-          []
-          attrs))
+(defn- error-message [attr message]
+  (-> (name attr)
+      (string/capitalize)
+      (->>
+       (format (str "%s " message)))))
 
-(defn uniqueness-of [attrs model entity]
-  (reduce (fn [error-messages attr]
-            (if (first
-                 (sql/select entity
-                             (sql/where {attr (attr model)})))
-              (-> (name attr)
-                  (string/capitalize)
-                  (->>
-                   (format "%s should be unique."))
-                  (cons error-messages))))
-          []
-          attrs))
+(defn perform [data validations]
+  (map #(% data) validations))
+
+;; return a seq of functions ready to be applied with some data
+(defn create [{:keys [fields condition message]}]
+  (map (fn [field]
+         (fn [data]
+           (when (condition (field data))
+             (error-message field message))))
+       fields))
+
+(defn enlist [& validations]
+  (flatten validations))
+
+(defn presence-of [& fields]
+  (create {:fields fields
+           :condition (fn [o] (string/blank? o))
+           :message "should not be blank"}))

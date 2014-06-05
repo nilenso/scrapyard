@@ -3,16 +3,17 @@
             [korma.db :as db]
             [scrapyard.models.need :as need]
             [scrapyard.models.entities :as entities]
-            [scrapyard.models.validations :as validations]))
+            [scrapyard.models.validations :as validates]))
 
-(defn validate [idea]
-  (validations/presence-of [:title] idea))
+(def validations
+  (validates/enlist
+   (validates/presence-of :title :description)))
 
 (defn all []
   (sql/select entities/ideas))
 
 (defn create [attrs]
-  (if-let [errors (validate attrs)]
+  (if-let [errors (validates/perform attrs validations)]
     {:errors errors}
     (sql/insert entities/ideas
                 (sql/values {:title (:title attrs)

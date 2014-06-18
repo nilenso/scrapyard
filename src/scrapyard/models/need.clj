@@ -29,3 +29,9 @@
     (if-let [need (find-or-create {:name need})]
       (ideas-needs/create {:ideas_id idea-id
                            :needs_id (:id need)}))))
+
+(defn find-by-id [id]
+  (first
+   (sql/select entities/needs
+               (sql/with entities/ideas)
+               (sql/where {:id id}))))

@@ -28,3 +28,9 @@
     (if-let [tool (find-or-create {:name tool})]
       (ideas-tools/create {:ideas_id idea-id
                            :tools_id (:id tool)}))))
+
+(defn find-by-id [id]
+  (first
+   (sql/select entities/needs
+               (sql/with entities/ideas)
+               (sql/where {:id id}))))

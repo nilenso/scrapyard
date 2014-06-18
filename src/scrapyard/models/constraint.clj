@@ -28,3 +28,9 @@
     (if-let [constraint (find-or-create {:name constraint})]
       (ideas-constraints/create {:ideas_id idea-id
                                  :constraints_id (:id constraint)}))))
+
+(defn find-by-id [id]
+  (first
+   (sql/select entities/needs
+               (sql/with entities/ideas)
+               (sql/where {:id id}))))

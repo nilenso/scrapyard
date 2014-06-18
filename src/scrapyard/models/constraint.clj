@@ -31,6 +31,6 @@
 
 (defn find-by-id [id]
   (first
-   (sql/select entities/needs
+   (sql/select entities/constraints
                (sql/with entities/ideas)
                (sql/where {:id id}))))

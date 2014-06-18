@@ -129,9 +129,8 @@ label {
 
 /* errors */
 .error-messages {
-  width: 75%;
-  margin: 45px auto 0;
   color: crimson;
+  padding-left: 20px;
 }
 
 /* general */

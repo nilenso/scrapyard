@@ -22,7 +22,6 @@
                              :description (:description attrs)}))))
 
 (defn create-with-extras [idea-attrs need-attrs tool-attrs constraint-attrs]
-  (prn need-attrs tool-attrs constraint-attrs)
   (db/transaction
    (let [idea (create idea-attrs)
          idea-id (:id idea)]

@@ -14,9 +14,8 @@
 
 (defn errors [errors]
   (if errors
-    [:div {:class "error-messages"}
-     [:ul
-      (map
-       (fn [error]
-         [:li error])
-       errors)]]))
+    [:ul {:class "error-messages"}
+     (map
+      (fn [error]
+        [:li error])
+      errors)]))

@@ -136,6 +136,20 @@ label {
   width: 70%;
 }
 
+.idea-tag-item {
+  color: #16A085;
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.idea-tag-item:hover {
+  color: #171717;
+  opacity: 0.5;
+}
+
+.idea-tag-item:after { content: ", "; }
+.idea-tag-item:last-child:after { content: ""; }
+
 /* errors */
 .error-messages {
   color: crimson;

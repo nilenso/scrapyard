@@ -36,4 +36,6 @@
   (first
    (sql/select entities/ideas
                (sql/with entities/needs)
+               (sql/with entities/tools)
+               (sql/with entities/constraints)
                (sql/where {:id id}))))

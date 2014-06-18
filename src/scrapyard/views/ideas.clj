@@ -4,17 +4,17 @@
             [hiccup.element :as h-element]
             [hiccup.page :as h-page]))
 
-(defn idea-list-item [idea]
-  [:a {:href (str "/ideas/" (get idea :id)) :class "idea-list-item"} (get idea :title)])
-
-(defn stringify-tags [needs]
-  (clojure.string/join ","
-                       (map (fn [need] (:name need)) needs)))
+(defn linkify-items [items {:keys [link-to css-class property]}]
+  (map (fn [item]
+         [:a {:href (str (str "/" link-to "/") (get item :id)) :class css-class} (get item property)])
+       items))
 
 (defn index [ideas]
   (layout/common [:a {:href "/ideas/new" :class "create-idea-link"} "Create New Idea"]
                  [:div {:class "idea-list"}
-                  (map idea-list-item ideas)]))
+                  (linkify-items ideas {:link-to "ideas"
+                                        :css-class "idea-list-item"
+                                        :property :title})]))
 
 (defn new [errors]
   (layout/common
@@ -46,5 +46,15 @@
                   [:p (:title idea)]
                   [:h2 "Description"]
                   [:p (:description idea)]
-                  [:h2 "Tags"]
-                  [:p (stringify-tags (:needs idea))]]))
+                  [:h2 "Needs"]
+                  [:p (linkify-items (:needs idea) {:link-to "needs"
+                                                    :css-class "idea-tag-item"
+                                                    :property :name})]
+                  [:h2 "Tools"]
+                  [:p (linkify-items (:tools idea) {:link-to "tools"
+                                                    :css-class "idea-tag-item"
+                                                    :property :name})]
+                  [:h2 "Constraints"]
+                  [:p (linkify-items (:constraints idea) {:link-to "constraints"
+                                                          :css-class "idea-tag-item"
+                                                          :property :name})]]))

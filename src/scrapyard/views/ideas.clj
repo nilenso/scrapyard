@@ -4,17 +4,23 @@
             [hiccup.element :as h-element]
             [hiccup.page :as h-page]))
 
-(defn linkify-items [items {:keys [link-to css-class property]}]
-  (map (fn [item]
-         [:a {:href (str (str "/" link-to "/") (get item :id)) :class css-class} (get item property)])
-       items))
+(defn linkify-item [item {:keys [link-to css-class property]}]
+  [:a {:href (str (str "/" link-to "/") (get item :id)) :class css-class} (get item property)])
+
+(defn linkify-items [items attrs]
+  (map (fn [item] (linkify-item item attrs)) items))
 
 (defn index [ideas]
   (layout/common [:a {:href "/ideas/new" :class "create-idea-link"} "Create New Idea"]
                  [:div {:class "idea-list"}
-                  (linkify-items ideas {:link-to "ideas"
-                                        :css-class "idea-list-item"
-                                        :property :title})]))
+                  (map
+                   (fn [idea]
+                     [:div {:class "idea-list-item"}
+                      (linkify-item idea {:link-to "ideas"
+                                          :css-class "idea-list-item-link"
+                                          :property :title})
+                      [:p {:class "idea-list-item-description"} (get idea :description)]])
+                   ideas)]))
 
 (defn new [errors]
   (layout/common

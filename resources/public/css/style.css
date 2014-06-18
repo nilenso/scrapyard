@@ -1,5 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 
+.nilenso-logo-link {
+  float: left;
+  margin: -5px 0 0 20px;
+}
+
+.nilenso-logo {
+  width: 70px;
+}
+
 .container {
   width: 960px;
   margin: 0 auto;

@@ -20,13 +20,20 @@
   (layout/common
    (layout/errors errors)
    (form-to {:class "new-idea-form"} [:post "/ideas"]
-            (label "idea[title]" "Title")
-            (text-field {:class "new-idea-form-title"} "idea[title]")
-            (label "idea[description]" "Description")
-            (text-area {:class "new-idea-form-description"} "idea[description]")
-            (label "needs[name]" "Needs")
-            (text-field {:class "new-idea-form-need"} "needs[name]")
-            (submit-button {:class "new-idea-form-submit"} "Save"))
+            [:div {:class "new-idea-form-col-1"}
+             (label "idea[title]" "Title")
+             (text-field {:class "new-idea-form-title"} "idea[title]")
+             (label "idea[description]" "Description")
+             (text-area {:class "new-idea-form-description"} "idea[description]")]
+            [:div {:class "new-idea-form-col-2"}
+             (label "needs[name]" "Needs")
+             (text-field {:class "new-idea-form-needs"} "needs[name]")
+             (label "tools[name]" "Tools")
+             (text-field {:class "new-idea-form-tools"} "tools[name]")
+             (label "constraints[name]" "Constraints")
+             (text-field {:class "new-idea-form-constraints"} "constraints[name]")]
+            [:div {:class "new-idea-form-row-separator clearfix"}
+             (submit-button {:class "new-idea-form-submit"} "Save")])
 
    (h-page/include-css "/css/select2.css")
    (h-page/include-js "/javascripts/select2.min.js")

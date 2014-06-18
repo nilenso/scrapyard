@@ -65,7 +65,7 @@ label {
 }
 
 .new-idea-form {
-  width: 70%;
+  width: 100%;
   margin: 60px auto 0;
 }
 
@@ -74,29 +74,50 @@ label {
   width: 100%;
   padding: 5px;
   border: 1px solid #AAA;
+  min-height: 18px;
 }
 
 .new-idea-form-description {
   height: 300px;
 }
 
-.new-idea-form-need {
+.new-idea-form-needs, .new-idea-form-tools, .new-idea-form-constraints {
   margin-top: 10px;
   width: 300px;
 }
 
 .new-idea-form-submit {
   border: 1px dotted #16A085;
-  width: 100px;
-  padding: 10px;
-  margin-top: 20px;
+  width: 200px;
   background-color: white;
-  font-weight: bolder;
+  margin: 30px auto 0;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: #171717;
 }
 
 .new-idea-form-submit:hover {
   cursor: pointer;
   border: 1px solid #16A085;
+}
+
+.new-idea-form-col-1 {
+  float: left;
+  width: 50%;
+}
+
+.new-idea-form-col-2 {
+  width: 40%;
+  float: right;
+}
+
+.new-idea-form-row-separator {
+  padding-top: 30px;
 }
 
 /* idea show */
@@ -111,4 +132,10 @@ label {
   width: 75%;
   margin: 45px auto 0;
   color: crimson;
+}
+
+/* general */
+
+.clearfix {
+  clear: both;
 }

@@ -9,7 +9,10 @@
        (format (str "%s " message)))))
 
 (defn perform [data validations]
-  (map #(% data) validations))
+  (let [errors (map #(% data) validations)]
+    (if (every? nil? errors)
+      false
+      errors)))
 
 ;; return a seq of functions ready to be applied with some data
 (defn create [{:keys [fields condition message]}]

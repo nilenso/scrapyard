@@ -7,6 +7,6 @@
           (next (re-find #"(.*)://(.*):(.*)@(.*):(.*)/(.*)" (or (System/getenv "DATABASE_URL") "")))]
       (db/postgres {:db (or db-name "scrapyard_development")
                     :password (or password "")
-                    :user (or username "jithu")
+                    :user (or username "kitallis")
                     :host (or host "localhost")
                     :port (or port "5432")}))))

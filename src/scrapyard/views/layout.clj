@@ -11,7 +11,7 @@
     [:a {:href "http://nilenso.com"
          :class "nilenso-logo-link"}
      [:img {:class "nilenso-logo"
-            :src "images/nilenso-200.png"
+            :src "/images/nilenso-200.png"
             :title "Nilenso"}]]
     [:div {:class "github-ribbon"}
      [:a {:href "https://github.com/nilenso/westwind"}

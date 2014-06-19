@@ -8,6 +8,12 @@
   (validates/enlist
    (validates/presence-of :name)))
 
+(defn all []
+  (sql/select entities/needs))
+
+(defn find-all-names []
+  (map (fn [need] (:name need)) (all)))
+
 (defn create [attrs]
   (if-let [errors (validates/perform attrs validations)]
     {:errors errors}

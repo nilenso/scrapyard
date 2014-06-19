@@ -2,7 +2,8 @@
   (use hiccup.form)
   (:require [scrapyard.views.layout :as layout]
             [hiccup.element :as h-element]
-            [hiccup.page :as h-page]))
+            [hiccup.page :as h-page]
+            [clojure.data.json :as json]))
 
 (defn linkify-item [{:keys [link-to css-class content]}]
   [:a {:href link-to :class css-class} content])
@@ -27,9 +28,9 @@
                       [:p {:class "idea-list-item-description"} (:description idea)]])
                    ideas)]))
 
-(defn new [errors]
+(defn new [attrs]
   (layout/common
-   (layout/errors errors)
+   (layout/errors (:errors attrs))
    (form-to {:class "new-idea-form"} [:post "/ideas"]
             [:div {:class "new-idea-form-col-1"}
              (label "idea[title]" "Title")
@@ -49,7 +50,8 @@
    (h-page/include-css "/css/select2.css")
    (h-page/include-js "/javascripts/select2.min.js")
    (h-page/include-js "/javascripts/new_idea.js")
-   (h-element/javascript-tag "$(document).ready(function() { new Scrapyard.NewIdea($('.new-idea-form')) });")))
+   (let [opts (json/write-str attrs)]
+     (h-element/javascript-tag (format "$(document).ready(function() { new Scrapyard.NewIdea($('.new-idea-form'), %s) });" opts)))))
 
 (defn show [idea]
   (layout/common [:div {:class "idea-details"}

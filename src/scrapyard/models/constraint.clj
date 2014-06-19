@@ -7,6 +7,9 @@
 (def validations
   (validates/enlist))
 
+(defn all []
+  (sql/select entities/constraints))
+
 (defn create [attrs]
   (if-let [errors (validates/perform attrs validations)]
     {:errors errors}
@@ -17,6 +20,9 @@
   (first
    (sql/select entities/constraints
                (sql/where {:name name}))))
+
+(defn find-all-names []
+  (map (fn [constraint] (:name constraint)) (all)))
 
 (defn find-or-create [attrs]
   (if-let [idea (find-by-name (:name attrs))]

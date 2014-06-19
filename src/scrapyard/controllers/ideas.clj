@@ -1,6 +1,9 @@
 (ns scrapyard.controllers.ideas
   (:require [scrapyard.views.ideas :as view]
             [scrapyard.models.idea :as idea]
+            [scrapyard.models.need :as need]
+            [scrapyard.models.tool :as tool]
+            [scrapyard.models.constraint :as constraint]
             [ring.util.response :as resp]))
 
 (defn- tokenize-extras [extras]
@@ -12,7 +15,10 @@
   (view/index (idea/all)))
 
 (defn new [request]
-  (view/new []))
+  (let [tags {:needs (need/find-all-names)
+              :tools (tool/find-all-names)
+              :constraints (constraint/find-all-names)}]
+    (view/new tags)))
 
 (defn create [request]
   (let [idea

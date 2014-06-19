@@ -11,7 +11,7 @@
     []
     (clojure.string/split extras #",")))
 
-(def tags
+(defn tags []
   {:needs (need/find-all-names)
    :tools (tool/find-all-names)
    :constraints (constraint/find-all-names)})
@@ -20,7 +20,7 @@
   (view/index (idea/all)))
 
 (defn new [request]
-  (view/new tags))
+  (view/new (tags)))
 
 (defn create [request]
   (let [idea
@@ -29,7 +29,7 @@
                                  (tokenize-extras (get-in request [:params :tools :name]))
                                  (tokenize-extras (get-in request [:params :constraints :name])))]
     (if-let [errors (:errors idea)]
-      (view/new (conj tags {:errors errors}))
+      (view/new (conj (tags) {:errors errors}))
       (resp/redirect "/"))))
 
 (defn show [id]

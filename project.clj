@@ -8,6 +8,7 @@
                  [ring/ring-devel "1.2.1"]
                  [ragtime/ragtime.sql.files "0.3.7"]
                  [korma "0.3.1"]
+                 [org.clojure/data.json "0.2.5"]
                  [org.postgresql/postgresql "9.3-1100-jdbc4"]
                  [org.clojure/java.jdbc "0.3.3"]]
   :min-lein-version "2.0.0"

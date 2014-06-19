@@ -8,11 +8,6 @@
     [:link {:rel "stylesheet" :type "text/css" :href "/css/style.css"}]]
     (h-page/include-js "/javascripts/jquery-2.1.1.min.js")
    [:body
-    [:a {:href "http://nilenso.com"
-         :class "nilenso-logo-link"}
-     [:img {:class "nilenso-logo"
-            :src "/images/nilenso-200.png"
-            :title "Nilenso"}]]
     [:div {:class "github-ribbon"}
      [:a {:href "https://github.com/nilenso/scrapyard"}
       [:img {:style "position: absolute; top: 0; right: 0; border: 0"

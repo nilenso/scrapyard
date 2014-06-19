@@ -4,11 +4,16 @@
             [hiccup.element :as h-element]
             [hiccup.page :as h-page]))
 
-(defn linkify-item [item {:keys [link-to css-class property]}]
-  [:a {:href (str (str "/" link-to "/") (get item :id)) :class css-class} (get item property)])
+(defn linkify-item [{:keys [link-to css-class content]}]
+  [:a {:href link-to :class css-class} content])
 
-(defn linkify-items [items attrs]
-  (map (fn [item] (linkify-item item attrs)) items))
+(defn linkify-tags [items resource-name]
+  (map
+   (fn [item]
+     (linkify-item {:link-to (str "/" resource-name "/" (:id item))
+                    :css-class "idea-tag-item"
+                    :content (:name item)}))
+   items))
 
 (defn index [ideas]
   (layout/common [:a {:href "/ideas/new" :class "create-idea-link"} "Create New Idea"]
@@ -16,10 +21,10 @@
                   (map
                    (fn [idea]
                      [:div {:class "idea-list-item"}
-                      (linkify-item idea {:link-to "ideas"
-                                          :css-class "idea-list-item-link"
-                                          :property :title})
-                      [:p {:class "idea-list-item-description"} (get idea :description)]])
+                      (linkify-item {:link-to (str "/ideas/" (:id idea))
+                                     :css-class "idea-list-item-link"
+                                     :content (:title idea)})
+                      [:p {:class "idea-list-item-description"} (:description idea)]])
                    ideas)]))
 
 (defn new [errors]
@@ -53,14 +58,8 @@
                   [:h2 "Description"]
                   [:p (:description idea)]
                   [:h2 "Needs"]
-                  [:p (linkify-items (:needs idea) {:link-to "needs"
-                                                    :css-class "idea-tag-item"
-                                                    :property :name})]
+                  [:p (linkify-tags (:needs idea) "needs")]
                   [:h2 "Tools"]
-                  [:p (linkify-items (:tools idea) {:link-to "tools"
-                                                    :css-class "idea-tag-item"
-                                                    :property :name})]
+                  [:p (linkify-tags (:tools idea) "tools")]
                   [:h2 "Constraints"]
-                  [:p (linkify-items (:constraints idea) {:link-to "constraints"
-                                                          :css-class "idea-tag-item"
-                                                          :property :name})]]))
+                  [:p (linkify-tags (:constraints idea) "constraints")]]))
